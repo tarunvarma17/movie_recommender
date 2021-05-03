@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Movie Picker</title>
+    </head>
+    <body>
+        {% block main %}
+            <h2>Pick your movie on your own!</h2>
+            <form method = 'POST' action = '/pick'>
+            {{ form.csrf_token }}
+            <p>Enter the Starting year: </p>{{ form.start_year}}
+            <p>Enter the Ending year: </p>{{ form.end_year}}
+            <p>Select required genre: </p>{{ form.genre}}
+            <p>Show English Films Only {{ form.eng_only }}</p>
+            <p>Animated Film? {{ form.anim }}</p>
+            <br><br>
+            {{form.submit}}
+            </form>
+            {% if genre %}}
+            <h3> Movies that fit yor criteria :</h3>
+            <ol>
+            {% for movie in picklist %}
+            <li>{{ movie }}</li>
+            {% endfor %}
+            </ol>
+            
+            {% endif %}
+            <h3><a href = "{{ url_for('home') }}">Return</a></h3>
+    {% endblock  %}
+    </body>
+</html>

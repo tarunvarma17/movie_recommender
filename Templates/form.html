@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    
+    <body>
+    {% block main %}
+            <h1>Content Based Recommender</h1>
+
+            <h2>Enter a movie you like (pre-2017), and get recommendations based on that</h2>
+            <form method = "POST" action = "/form">
+            {{ form.csrf_token }}
+            {{ form.username }}
+            {{ form.submit }}
+            </form>
+        {% if uname %}
+        <h3> Movies similar to {{ orig_title }} :</h3>
+        <ol>
+        {% for movie in rec_list %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+        </ol>
+        <h3> If you enjoy the work of {{ director }} : </h3>
+        <ol>
+            {% for movie in dir_list %}
+                <li>{{ movie }}</li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+
+        <h3><a href = "{{ url_for('home') }}">Return</a></h3>
+
+    {% endblock  %}
+    </body>
+</html>
